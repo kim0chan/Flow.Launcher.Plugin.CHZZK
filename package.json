@@ -1,0 +1,12 @@
+{
+  "name": "flow-launcher-chzzk",
+  "dependencies": {
+    "axios": "^1.10.0",
+    "dotenv": "^16.6.0",
+    "open": "^8.4.0",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.4"
+  }
+}

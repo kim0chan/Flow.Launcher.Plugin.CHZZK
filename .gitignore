@@ -1,0 +1,9 @@
+# IDE Settings
+.idea
+.vscode
+
+# Packages
+node_modules
+.env
+
+*.js
