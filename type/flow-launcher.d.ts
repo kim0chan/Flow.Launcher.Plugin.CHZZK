@@ -1,4 +1,4 @@
-export type Command = 'query' | 'visit' | 'live' | 'category';
+export type Command = 'query' | 'visit' | 'live' | 'category' | 'add' | 'remove';
 
 export type ResultMessage = {
   result: Row[];

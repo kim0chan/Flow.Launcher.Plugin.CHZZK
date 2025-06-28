@@ -20,3 +20,10 @@ export interface LiveDto {
   channelName: string;
   channelImageUrl: string;
 }
+
+export interface ChannelDto {
+  channelId: string;
+  channelName: string;
+  channelImageUrl: string;
+  followerCount: number;
+}

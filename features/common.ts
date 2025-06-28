@@ -1,6 +1,6 @@
 import { invokeWatch } from './default';
 import { invokeCategory } from './category';
-import { invokeChannel } from './channel';
+import {invokeChannelAdd, invokeChannelList, invokeChannelRemove} from './channel';
 import { ResultMessage } from '../type/flow-launcher';
 import { invokeLive } from "./live";
 
@@ -30,12 +30,18 @@ export const handleInput = async (input: string): Promise<ResultMessage> => {
 
     // Consider the entered word as a channel name and hand it over to the channel query function
     const channelName = command;
-    return invokeChannel(channelName);
+    return invokeChannelList(channelName);
   }
 
+  // Two or more words query
   if (command === 'category') {
     return await invokeCategory(args);
+  } else if (command === 'add') {
+    return await invokeChannelAdd(args);
+  } else if (command === 'rm' || command === 'remove') {
+    return await invokeChannelRemove(args);
   } else {
-    return invokeWatch();
+    const channelQuery = `${command} ${args}`
+    return invokeChannelList(channelQuery);
   }
 };

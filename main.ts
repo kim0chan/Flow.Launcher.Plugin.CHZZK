@@ -1,3 +1,5 @@
+import {addChannel, invokeChannelRemove, removeChannel} from "./features/channel";
+
 require('dotenv').config({ quiet: true });
 
 import { invokeWatch } from './features/default';
@@ -23,8 +25,15 @@ const routeMethod = async (): Promise<void> => {
       case 'visit':
         openUrl(input);
         break;
+      case 'add':
+        const [channelName, channelId] = parameters;
+        addChannel(channelName, channelId);
+        break;
+      case 'remove':
+        removeChannel(input);
+        break;
       default:
-        output(invokeWatch());
+        output(await invokeWatch());
     }
 
   } catch (e) {
