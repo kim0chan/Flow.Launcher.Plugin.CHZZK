@@ -2,6 +2,7 @@ import { CategoryDto } from '../api/model';
 import { ResultMessage, Row } from '../type/flow-launcher';
 import { BASE_API_URL, BASE_URL } from '../api/constant';
 
+// TODO: Seperate into api file
 export const searchCategory = async (query: string): Promise<CategoryDto[]> => {
   try {
     const url = new URL(BASE_API_URL + '/categories/search');
@@ -24,10 +25,10 @@ export const searchCategory = async (query: string): Promise<CategoryDto[]> => {
     const data = await response.json();
     return data?.content?.data ?? [];
   } catch (e) {
-    console.error('searchCategory error →', (e as Error).message);
+    console.error('searchCategory error: ', (e as Error).message);
     return [];
   }
-}
+};
 
 export const invokeCategory = async (query: string): Promise<ResultMessage> => {
   const response = await searchCategory(query);

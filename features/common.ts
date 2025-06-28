@@ -1,7 +1,8 @@
-import {invokeWatch} from './default';
-import {invokeCategory} from './category';
-import {invokeChannel} from './channel';
-import {ResultMessage} from '../type/flow-launcher';
+import { invokeWatch } from './default';
+import { invokeCategory } from './category';
+import { invokeChannel } from './channel';
+import { ResultMessage } from '../type/flow-launcher';
+import { invokeLive } from "./live";
 
 const splitInput = (input: string): [string, string | undefined] => {
   const firstSpaceIndex = input.indexOf(' ');
@@ -17,12 +18,17 @@ export const handleInput = async (input: string): Promise<ResultMessage> => {
   const [command, args] = splitInput(input);
 
   if (!args) {
-    // 띄어쓰기가 없는 경우
+    // One-word query
     if (command.length === 0) {
-      // 빈 문자열인 경우
+      // Empty string
       return invokeWatch();
     }
-    // 입력된 단어를 채널 이름으로 간주하여 채널 쿼리 함수로 넘김
+
+    if (command === 'live') {
+      return invokeLive(args);
+    }
+
+    // Consider the entered word as a channel name and hand it over to the channel query function
     const channelName = command;
     return invokeChannel(channelName);
   }

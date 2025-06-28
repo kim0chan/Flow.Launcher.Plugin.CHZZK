@@ -1,8 +1,8 @@
 require('dotenv').config({ quiet: true });
 
 import { invokeWatch } from './features/default';
-import {Command, ResultMessage, Row} from './type/flow-launcher';
-import {handleInput} from './features/common';
+import { Command, ResultMessage } from './type/flow-launcher';
+import { handleInput } from './features/common';
 const openUrl = require('./node_modules/open');
 
 const { method, parameters } = JSON.parse(process.argv[2]);
