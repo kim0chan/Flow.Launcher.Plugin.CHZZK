@@ -23,7 +23,7 @@ jobs:
         with:
           path: 'plugin.json'
           prop_path: 'Version'
-      - run: echo ${{steps.version.outputs.prop}}
+      - run: echo ${{ steps.version.outputs.prop }}
 
       - name: Install dependencies
         run: npm ci
@@ -48,6 +48,8 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
+          name: 'Release v${{ steps.version.output.prop }}'
+          tag_name: 'v${{ steps.version.output.prop }}'
           files: plugin.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

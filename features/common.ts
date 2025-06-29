@@ -1,6 +1,6 @@
-import {ResultMessage, Row} from '../type/plugin';
+import { ResultMessage, Row } from '../type/plugin';
 import { handleDefault } from './default';
-import {handleCategory, handleCategoryGuide} from './category';
+import { handleCategory, handleCategoryGuide } from './category';
 import { handleLive } from "./live";
 import {
   handleChannelAdd, handleChannelAddGuide,

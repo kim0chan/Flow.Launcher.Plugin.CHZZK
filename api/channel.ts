@@ -1,5 +1,5 @@
-import {ChannelDto} from "./model";
-import {BASE_API_URL} from "./constant";
+import { ChannelDto } from './model';
+import { BASE_API_URL } from './constant';
 
 export const searchChannels = async (...channelIds: string[]): Promise<ChannelDto[]> => {
   try {

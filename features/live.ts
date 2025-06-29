@@ -1,6 +1,6 @@
 import { ResultMessage, Row } from '../type/plugin';
-import { BASE_URL } from "../api/constant";
-import { searchLive } from "../api/live";
+import { BASE_URL } from '../api/constant';
+import { searchLive } from '../api/live';
 
 export const handleLive = async (next?: string): Promise<ResultMessage> => {
   const response = await searchLive();  // TODO: retrieve next feature

@@ -1,6 +1,6 @@
-import * as path from "node:path";
-import * as fs from "node:fs";
-import { ChannelData } from "../type/plugin";
+const path = require('node:path');
+const fs = require('node:fs');
+import { ChannelData } from '../type/plugin';
 
 class DataManager {
   private filePath: string;

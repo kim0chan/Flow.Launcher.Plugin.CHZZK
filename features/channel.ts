@@ -2,7 +2,7 @@ import db from "./data";
 import { BASE_URL } from "../api/constant";
 import { ChannelData, ResultMessage, Row } from '../type/plugin';
 import { buildSearchRow, handleDefault } from './default';
-import {buildMessageRow, buildRow, buildVisitRow} from "./common";
+import { buildMessageRow, buildRow, buildVisitRow } from "./common";
 import { searchChannels } from "../api/channel";
 
 export const addChannel = (channelName: string, channelId: string) => {

@@ -1,5 +1,5 @@
-import { LiveDto } from "./model";
-import { BASE_API_URL } from "./constant";
+import { LiveDto } from './model';
+import { BASE_API_URL } from './constant';
 
 export const searchLive = async (next?: string): Promise<LiveDto[]> => {
   try {

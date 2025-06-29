@@ -1,8 +1,8 @@
-import db from "./data";
+import db from './data';
 import { BASE_URL } from '../api/constant';
 import { ResultMessage, Row } from '../type/plugin';
-import { searchChannels } from "../api/channel";
-import { buildChangeQueryRow, buildVisitRow } from "./common";
+import { searchChannels } from '../api/channel';
+import { buildChangeQueryRow, buildVisitRow } from './common';
 
 export const handleDefault = async (): Promise<ResultMessage> => ({
   result: await buildDefaultRows(),

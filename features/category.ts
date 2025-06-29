@@ -1,7 +1,7 @@
 import { ResultMessage, Row } from '../type/plugin';
 import { BASE_URL } from '../api/constant';
 import { searchCategory } from "../api/category";
-import {buildMessageRow, buildVisitRow} from "./common";
+import { buildMessageRow, buildVisitRow } from "./common";
 
 export const handleCategory = async (query: string): Promise<ResultMessage> => {
   const response = await searchCategory(query);
