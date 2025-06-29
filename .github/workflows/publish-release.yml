@@ -1,6 +1,7 @@
 name: Publish Release
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - 'v*'  # 버전 태그 푸시 시 실행되도록
