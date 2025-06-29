@@ -1,6 +1,6 @@
 require('dotenv').config({ quiet: true });
 
-const openUrl = require('./node_modules/open');
+const openUrl = require('open');
 import { addChannel, removeChannel } from "./features/channel";
 import { handleDefault } from './features/default';
 import { Command, ResultMessage } from './type/plugin';

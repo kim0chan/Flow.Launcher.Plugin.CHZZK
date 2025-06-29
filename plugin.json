@@ -8,6 +8,6 @@
   "Version": "1.0.0",
   "Language": "typescript",
   "Website": "https://github.com/kim0chan/Flow.Launcher.Plugin.CHZZK",
-  "ExecuteFileName": "main.js",
+  "ExecuteFileName": "dist/main.js",
   "IcoPath": "images\\app.png"
 }
