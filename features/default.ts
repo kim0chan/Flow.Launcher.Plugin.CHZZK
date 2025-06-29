@@ -1,7 +1,7 @@
 import { BASE_URL } from '../api/constant';
-import { ResultMessage, Row } from '../type/flow-launcher';
+import { ResultMessage, Row } from '../type/plugin';
 import db from "./data";
-import { searchChannels } from "./channel";
+import {searchChannels} from "../api/channel";
 
 export const invokeWatch = async (): Promise<ResultMessage> => ({
   result: await buildDefaultMessage(),

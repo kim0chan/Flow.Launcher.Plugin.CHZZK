@@ -3,7 +3,7 @@ import {addChannel, invokeChannelRemove, removeChannel} from "./features/channel
 require('dotenv').config({ quiet: true });
 
 import { invokeWatch } from './features/default';
-import { Command, ResultMessage } from './type/flow-launcher';
+import { Command, ResultMessage } from './type/plugin';
 import { handleInput } from './features/common';
 const openUrl = require('./node_modules/open');
 

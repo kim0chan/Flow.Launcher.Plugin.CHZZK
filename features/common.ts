@@ -1,7 +1,7 @@
 import { invokeWatch } from './default';
 import { invokeCategory } from './category';
 import {invokeChannelAdd, invokeChannelList, invokeChannelRemove} from './channel';
-import { ResultMessage } from '../type/flow-launcher';
+import { ResultMessage } from '../type/plugin';
 import { invokeLive } from "./live";
 
 const splitInput = (input: string): [string, string | undefined] => {

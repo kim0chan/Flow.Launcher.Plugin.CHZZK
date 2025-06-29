@@ -1,12 +1,8 @@
 import * as path from "node:path";
 import * as fs from "node:fs";
+import {ChannelData} from "../type/plugin";
 
-export interface ChannelData {
-  name: string;
-  id: string;
-}
-
-class JsonDatabase {
+class DataManager {
   private filePath: string;
 
   constructor(filename: string) {
@@ -52,6 +48,6 @@ class JsonDatabase {
   }
 }
 
-const db = new JsonDatabase('channels.json');
+const db = new DataManager('channels.json');
 
 export default db;

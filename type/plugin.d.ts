@@ -15,3 +15,8 @@ export type RPCAction = {
   method: string;
   parameters?: (string | boolean)[];
 }
+
+export interface ChannelData {
+  name: string;
+  id: string;
+}

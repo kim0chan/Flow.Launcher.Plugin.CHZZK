@@ -1,35 +1,8 @@
 import {buildTestMessage, invokeSearch, invokeWatch} from './default';
-import {ResultMessage, Row} from '../type/flow-launcher';
-import {ChannelDto} from "../api/model";
-import {BASE_API_URL, BASE_URL} from "../api/constant";
-import db, {ChannelData} from "./data";
-
-export const searchChannels = async (...channelIds: string[]): Promise<ChannelDto[]> => {
-  try {
-    const url = new URL(BASE_API_URL + '/channels')
-    url.searchParams.append('channelIds', channelIds.join(","))
-
-    const response = await fetch(url.toString(), {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Client-Id': process.env.CLIENT_ID,
-        'Client-Secret': process.env.CLIENT_SECRET,
-      },
-    });
-
-    if (!response.ok) {
-      console.error(`API 요청 실패: ${response.status}`);
-      return [];
-    }
-
-    const data = await response.json();
-    return data?.content?.data ?? [];
-  } catch (e) {
-    console.error('searchChannels error: ', (e as Error).message);
-    return [];
-  }
-}
+import {ChannelData, ResultMessage, Row} from '../type/plugin';
+import {BASE_URL} from "../api/constant";
+import db from "./data";
+import {searchChannels} from "../api/channel";
 
 export const invokeChannelAdd = async (channelId: string): Promise<ResultMessage> => {
   const response = await searchChannels(channelId);
