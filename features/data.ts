@@ -1,12 +1,12 @@
 import * as path from "node:path";
 import * as fs from "node:fs";
-import {ChannelData} from "../type/plugin";
+import { ChannelData } from "../type/plugin";
 
 class DataManager {
   private filePath: string;
 
   constructor(filename: string) {
-    const dataDir = path.resolve(__dirname, 'data');
+    const dataDir = path.resolve(process.cwd(), 'data');
     if (!fs.existsSync(dataDir)) {
       fs.mkdirSync(dataDir);
     }

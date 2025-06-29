@@ -1,11 +1,10 @@
-import {addChannel, invokeChannelRemove, removeChannel} from "./features/channel";
-
 require('dotenv').config({ quiet: true });
 
-import { invokeWatch } from './features/default';
+const openUrl = require('./node_modules/open');
+import { addChannel, removeChannel } from "./features/channel";
+import { handleDefault } from './features/default';
 import { Command, ResultMessage } from './type/plugin';
 import { handleInput } from './features/common';
-const openUrl = require('./node_modules/open');
 
 const { method, parameters } = JSON.parse(process.argv[2]);
 
@@ -13,14 +12,14 @@ const output = (msg: ResultMessage) => {
   process.stdout.write(JSON.stringify(msg) + '\n');
 }
 
+// JSON-RPC method routing
 const routeMethod = async (): Promise<void> => {
   const input = parameters[0] ?? '';
 
   try {
     switch (method as Command) {
       case 'query':
-        const result = await handleInput(input);
-        output(result);
+        output(await handleInput(input));
         break;
       case 'visit':
         openUrl(input);
@@ -33,7 +32,7 @@ const routeMethod = async (): Promise<void> => {
         removeChannel(input);
         break;
       default:
-        output(await invokeWatch());
+        output(await handleDefault());
     }
 
   } catch (e) {
@@ -42,5 +41,5 @@ const routeMethod = async (): Promise<void> => {
   }
 }
 
-routeMethod();
+routeMethod().then();
 

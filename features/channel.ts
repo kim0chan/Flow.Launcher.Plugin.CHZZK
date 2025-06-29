@@ -1,59 +1,84 @@
-import {buildTestMessage, invokeSearch, invokeWatch} from './default';
-import {ChannelData, ResultMessage, Row} from '../type/plugin';
-import {BASE_URL} from "../api/constant";
 import db from "./data";
-import {searchChannels} from "../api/channel";
+import { BASE_URL } from "../api/constant";
+import { ChannelData, ResultMessage, Row } from '../type/plugin';
+import { buildSearchRow, handleDefault } from './default';
+import {buildMessageRow, buildRow, buildVisitRow} from "./common";
+import { searchChannels } from "../api/channel";
 
-export const invokeChannelAdd = async (channelId: string): Promise<ResultMessage> => {
+export const addChannel = (channelName: string, channelId: string) => {
+  const entry: ChannelData = {
+    name: channelName,
+    id: channelId,
+  }
+  db.addChannel(entry);
+}
+
+export const removeChannel = (channelId: string) => {
+  db.deleteById(channelId);
+}
+
+export const handleChannelAddGuide = (): ResultMessage => ({
+  result: [
+    buildMessageRow(
+      'Enter a ID to add channel to the list.',
+      'Example: add c42cd75ec4855a9edf204a407c3c1dd2',
+    ),
+  ],
+});
+
+export const handleChannelRemoveGuide = (): ResultMessage => ({
+  result: [ buildMessageRow('Enter a channel name to remove.') ],
+});
+
+export const handleChannelAdd = async (channelId: string): Promise<ResultMessage> => {
   const response = await searchChannels(channelId);
 
   if (response.length === 0) {
-    return { result: [ buildTestMessage('채널 ID를 정확히 입력하세요!') ] };
+    return { result: [ buildMessageRow('Please enter a correct channel ID') ] };
   }
   const channelFound = response[0];
 
-  const rows: Row[] = [{
-    Title: channelFound.channelName,
-    Subtitle: `${channelFound.followerCount} Followers`,
-    IcoPath: channelFound.channelImageUrl,
-    JsonRPCAction: {
-      method: 'add',
-      parameters: [channelFound.channelName, channelFound.channelId],
-    },
-  }]
+  const rows: Row[] = [
+    buildRow(
+      channelFound.channelName,
+      `${channelFound.followerCount} Followers`,
+      channelFound.channelImageUrl,
+      'add',
+      [channelFound.channelName, channelFound.channelId],
+    ),
+  ];
 
   return { result: rows };
 }
 
-export const invokeChannelList = async (channelName?: string): Promise<ResultMessage> => {
+export const handleChannelList = async (channelName?: string): Promise<ResultMessage> => {
   const addedChannels = db.findByName(channelName || '');
   const channels = addedChannels.length === 0
     ? []
     : await searchChannels(...addedChannels.map(c => c.id));
 
   if (channels.length === 0) {
-    return invokeSearch(channelName);
+    return {
+      result: [buildSearchRow(channelName)],
+    };
   }
   if (!channelName || channelName.length === 0) {
-    return await invokeWatch();
+    return await handleDefault();
   } else {
     return {
       result: [
-        ...channels.map(c => ({
-          Title: c.channelName,
-          Subtitle: `${c.followerCount} Followers`,
-          JsonRPCAction: {
-            method: 'visit',
-            parameters: [`${BASE_URL}/live/${c.channelId}`],
-          },
-          IcoPath: c.channelImageUrl,
-        })),
+        ...channels.map(c => buildVisitRow(
+          `${BASE_URL}/live/${c.channelId}`,
+          c.channelName,
+          `${c.followerCount} Followers`,
+          c.channelImageUrl,
+        )),
       ]
     };
   }
 }
 
-export const invokeChannelRemove = async (channelName: string): Promise<ResultMessage> => {
+export const handleChannelRemove = async (channelName: string): Promise<ResultMessage> => {
   const addedChannels = db.findByName(channelName);
   const channels = addedChannels.length === 0
     ? []
@@ -61,28 +86,13 @@ export const invokeChannelRemove = async (channelName: string): Promise<ResultMe
 
   return {
     result: [
-      ...channels.map(c => ({
-        Title: c.channelName,
-        Subtitle: `Remove ${c.channelName} (${c.followerCount} Followers)`,
-        JsonRPCAction: {
-          method: 'remove',
-          parameters: [c.channelId],
-        },
-        IcoPath: c.channelImageUrl,
-      })),
+      ...channels.map(c => buildRow(
+        c.channelName,
+        `Delete ${c.channelName} (${c.followerCount} Followers)`,
+        c.channelImageUrl,
+        'remove',
+        [c.channelId],
+      )),
     ]
   };
-}
-
-export const addChannel = (channelName: string, channelId: string) => {
-  const entry: ChannelData = {
-    name: channelName,
-    id: channelId,
-  }
-
-  db.addChannel(entry);
-}
-
-export const removeChannel = (channelId: string) => {
-  db.deleteById(channelId);
 }

@@ -1,56 +1,43 @@
+import db from "./data";
 import { BASE_URL } from '../api/constant';
 import { ResultMessage, Row } from '../type/plugin';
-import db from "./data";
-import {searchChannels} from "../api/channel";
+import { searchChannels } from "../api/channel";
+import { buildChangeQueryRow, buildVisitRow } from "./common";
 
-export const invokeWatch = async (): Promise<ResultMessage> => ({
-  result: await buildDefaultMessage(),
+export const handleDefault = async (): Promise<ResultMessage> => ({
+  result: await buildDefaultRows(),
 });
 
-const buildDefaultMessage = async (): Promise<Row[]> => {
+const buildChannelRows = async (): Promise<Row[]> => {
   const addedChannels = db.findByName('');
   const channels = addedChannels.length === 0
     ? []
     : await searchChannels(...addedChannels.map(c => c.id));
 
   return [
-    ...channels.map(c => ({
-      Title: c.channelName,
-      Subtitle: `${c.followerCount} Followers`,
-      JsonRPCAction: {
-        method: 'visit',
-        parameters: [`${BASE_URL}/live/${c.channelId}`],
-      },
-      IcoPath: c.channelImageUrl,
-    })),
-    {
-      Title: 'CHZZK',
-      JsonRPCAction: {
-        method: 'visit',
-        parameters: [BASE_URL],
-      },
-      IcoPath: 'images/app.png',
-    },
-  ];
+    ...channels.map(c => buildVisitRow(
+      `${BASE_URL}/live/${c.channelId}`,
+      c.channelName,
+      `${c.followerCount} Followers`,
+      c.channelImageUrl
+    ))
+  ]
 }
 
-export const buildTestMessage = (message: string): Row => {
-  return {
-    Title: "TEST",
-    Subtitle: `message: ${message}`,
-    IcoPath: "images/app.png",
-  }
-}
+const buildDefaultRows = async (): Promise<Row[]> => (
+  [
+    ...await buildChannelRows(),
+    buildVisitRow(BASE_URL, 'CHZZK', undefined, 'images/app.png'),
+    buildChangeQueryRow('cz category ', 'Category', undefined, 'images/app.png'),
+    buildChangeQueryRow('cz live', 'Live', undefined, 'images/app.png'),
+    buildChangeQueryRow('cz add ', 'Add Channel', undefined, 'images/app.png'),
+    buildChangeQueryRow('cz remove ', 'Remove Channel', undefined, 'images/app.png'),
+  ]
+);
 
-export const invokeSearch = (query: string): ResultMessage => {
-  return {
-    result: [{
-      Title: `Search ${query} on CHZZK`,
-      JsonRPCAction: {
-        method: 'visit',
-        parameters: [`${BASE_URL}/search?query=${query}`],
-      },
-      IcoPath: 'images/app.png',
-    }]
-  }
-}
+export const buildSearchRow = (query: string): Row => buildVisitRow(
+  `${BASE_URL}/search?query=${query}`,
+  `Search ${query} on CHZZK`,
+  undefined,
+  'images/app.png',
+);

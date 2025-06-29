@@ -14,6 +14,7 @@ export type Row = {
 export type RPCAction = {
   method: string;
   parameters?: (string | boolean)[];
+  dontHideAfterAction?: boolean;
 }
 
 export interface ChannelData {

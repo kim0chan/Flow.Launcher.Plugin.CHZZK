@@ -7,5 +7,4 @@ node_modules
 .env
 
 *.js
-
-features/data
+data
