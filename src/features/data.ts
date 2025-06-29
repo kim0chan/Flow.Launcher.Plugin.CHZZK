@@ -29,7 +29,6 @@ class DataManager {
   addChannel(entry: ChannelData): void {
     const channels = this.readChannels();
     if (channels.find(e => e.id === entry.id)) {
-      console.error(`Existing ID: ${entry.id}`);
       return;
     }
     channels.push(entry);
