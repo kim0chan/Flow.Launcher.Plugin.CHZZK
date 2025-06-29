@@ -24,7 +24,7 @@ jobs:
         with:
           path: 'plugin.json'
           prop_path: 'Version'
-      - run: echo ${{ steps.version.outputs.prop }}
+      - run: echo 'VERSION=${{ steps.version.outputs.prop }}'
 
       - name: Install dependencies
         run: npm ci
