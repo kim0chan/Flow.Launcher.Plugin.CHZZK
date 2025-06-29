@@ -20,6 +20,7 @@ jobs:
           node-version: 22
 
       - name: Get version
+        id: version
         uses: notiz-dev/github-action-json-property@release
         with:
           path: 'plugin.json'
