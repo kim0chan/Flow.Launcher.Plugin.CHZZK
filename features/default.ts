@@ -37,7 +37,7 @@ const buildDefaultRows = async (): Promise<Row[]> => (
 
 export const buildSearchRow = (query: string): Row => buildVisitRow(
   `${BASE_URL}/search?query=${query}`,
-  `Search ${query} on CHZZK`,
+  `Search '${query}' on CHZZK`,
   undefined,
   'images/app.png',
 );

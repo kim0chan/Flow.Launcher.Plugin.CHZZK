@@ -73,6 +73,7 @@ export const handleChannelList = async (channelName?: string): Promise<ResultMes
           `${c.followerCount} Followers`,
           c.channelImageUrl,
         )),
+        buildSearchRow(channelName),
       ]
     };
   }

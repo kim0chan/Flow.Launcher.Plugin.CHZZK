@@ -1,7 +1,9 @@
 {
   "name": "flow-launcher-chzzk",
+  "scripts": {
+    "build": "tsc main.ts"
+  },
   "dependencies": {
-    "axios": "^1.10.0",
     "dotenv": "^16.6.0",
     "open": "^8.4.0",
     "typescript": "^5.8.3"
