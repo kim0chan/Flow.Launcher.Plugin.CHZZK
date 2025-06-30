@@ -3,6 +3,7 @@ import { BASE_URL } from '../api/constant';
 import { ResultMessage, Row } from '../type/plugin';
 import { searchChannels } from '../api/channel';
 import { buildChangeQueryRow, buildVisitRow } from './common';
+import { ICO } from './constant';
 
 export const handleDefault = async (): Promise<ResultMessage> => ({
   result: await buildDefaultRows(),
@@ -28,10 +29,10 @@ const buildDefaultRows = async (): Promise<Row[]> => (
   [
     ...await buildChannelRows(),
     buildVisitRow(BASE_URL, 'CHZZK', undefined, 'images/app.png'),
-    buildChangeQueryRow('cz category ', 'Category', undefined, 'images/app.png'),
-    buildChangeQueryRow('cz live', 'Live', undefined, 'images/app.png'),
-    buildChangeQueryRow('cz add ', 'Add Channel', undefined, 'images/app.png'),
-    buildChangeQueryRow('cz remove ', 'Remove Channel', undefined, 'images/app.png'),
+    buildChangeQueryRow('cz category ', 'Category', undefined, 'images/category.png'),
+    buildChangeQueryRow('cz live', 'Live', undefined, 'images/live.png'),
+    buildChangeQueryRow('cz add ', 'Add Channel', undefined, 'images/add.png'),
+    buildChangeQueryRow('cz remove ', 'Remove Channel', undefined, 'images/remove.png'),
   ]
 );
 
@@ -39,5 +40,5 @@ export const buildSearchRow = (query: string): Row => buildVisitRow(
   `${BASE_URL}/search?query=${query}`,
   `Search '${query}' on CHZZK`,
   undefined,
-  'images/app.png',
+  ICO.SEARCH,
 );

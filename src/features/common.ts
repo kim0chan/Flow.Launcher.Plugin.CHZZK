@@ -7,6 +7,7 @@ import {
   handleChannelList,
   handleChannelRemove, handleChannelRemoveGuide,
 } from './channel';
+import { ICO } from './constant';
 
 const splitInput = (input: string): [string, string | undefined] => {
   const firstSpaceIndex = input.indexOf(' ');
@@ -69,7 +70,7 @@ export const buildRow = (
 ): Row => {
   const row: Row = {
     Title: title,
-    IcoPath: icoPath ?? 'images/app.png',
+    IcoPath: icoPath ?? ICO.APP,
   }
 
   if (subtitle)     row.Subtitle = subtitle;

@@ -4,6 +4,7 @@ import { ChannelData, ResultMessage, Row } from '../type/plugin';
 import { buildSearchRow, handleDefault } from './default';
 import { buildMessageRow, buildRow, buildVisitRow } from "./common";
 import { searchChannels } from "../api/channel";
+import { ICO } from './constant';
 
 export const addChannel = (channelName: string, channelId: string) => {
   const entry: ChannelData = {
@@ -22,12 +23,13 @@ export const handleChannelAddGuide = (): ResultMessage => ({
     buildMessageRow(
       'Enter a ID to add channel to the list.',
       'Example: add c42cd75ec4855a9edf204a407c3c1dd2',
+      ICO.ADD,
     ),
   ],
 });
 
 export const handleChannelRemoveGuide = (): ResultMessage => ({
-  result: [ buildMessageRow('Enter a channel name to remove.') ],
+  result: [ buildMessageRow('Enter a channel name to remove.', ICO.REMOVE) ],
 });
 
 export const handleChannelAdd = async (channelId: string): Promise<ResultMessage> => {
@@ -42,7 +44,7 @@ export const handleChannelAdd = async (channelId: string): Promise<ResultMessage
     buildRow(
       channelFound.channelName,
       `${channelFound.followerCount} Followers`,
-      channelFound.channelImageUrl,
+      channelFound.channelImageUrl || ICO.ADD,
       'add',
       [channelFound.channelName, channelFound.channelId],
     ),
@@ -71,7 +73,7 @@ export const handleChannelList = async (channelName?: string): Promise<ResultMes
           `${BASE_URL}/live/${c.channelId}`,
           c.channelName,
           `${c.followerCount} Followers`,
-          c.channelImageUrl,
+          c.channelImageUrl || ICO.ADD,
         )),
         buildSearchRow(channelName),
       ]
@@ -90,7 +92,7 @@ export const handleChannelRemove = async (channelName: string): Promise<ResultMe
       ...channels.map(c => buildRow(
         c.channelName,
         `Delete ${c.channelName} (${c.followerCount} Followers)`,
-        c.channelImageUrl,
+        c.channelImageUrl || ICO.REMOVE,
         'remove',
         [c.channelId],
       )),
