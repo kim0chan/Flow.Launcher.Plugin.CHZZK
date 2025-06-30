@@ -15,15 +15,14 @@ export const searchCategory = async (query: string): Promise<CategoryDto[]> => {
       },
     });
 
+    // TODO: can we make it better? ('throw' of exception caught locally)
     if (!response.ok) {
-      console.error(`API 요청 실패: ${response.status}`);
-      return [];
+      throw new Error('Failed to fetch categories.')
     }
 
     const data = await response.json();
     return data?.content?.data ?? [];
   } catch (e) {
-    console.error('searchCategory error: ', (e as Error).message);
-    return [];
+    throw e;
   }
 };

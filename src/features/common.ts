@@ -111,3 +111,5 @@ export const buildChangeQueryRow = (
   icoPath?: string,
   score?: number,
 ): Row => buildRow(title, subtitle, icoPath, 'Flow.Launcher.ChangeQuery', [query, true], true, score);
+
+export const buildErrorMessageRow = (e: Error) => buildMessageRow('Something went wrong!', e.message, ICO.APP);

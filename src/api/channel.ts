@@ -1,6 +1,7 @@
 import { ChannelDto } from './model';
 import { BASE_API_URL } from './constant';
 
+// TODO: better api error handling (when channel is already added but failed to fetch data from the server)
 export const searchChannels = async (...channelIds: string[]): Promise<ChannelDto[]> => {
   try {
     const url = new URL(BASE_API_URL + '/channels')
@@ -16,14 +17,12 @@ export const searchChannels = async (...channelIds: string[]): Promise<ChannelDt
     });
 
     if (!response.ok) {
-      console.error(`API 요청 실패: ${response.status}`);
       return [];
     }
 
     const data = await response.json();
     return data?.content?.data ?? [];
   } catch (e) {
-    console.error('searchChannels error: ', (e as Error).message);
-    return [];
+    return [];  // TODO: do something better
   }
 }

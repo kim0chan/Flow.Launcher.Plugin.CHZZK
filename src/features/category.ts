@@ -1,11 +1,18 @@
 import { ResultMessage, Row } from '../type/plugin';
 import { BASE_URL } from '../api/constant';
-import { searchCategory } from "../api/category";
-import { buildMessageRow, buildVisitRow } from "./common";
 import { ICO } from './constant';
+import { searchCategory } from "../api/category";
+import { CategoryDto } from '../api/model';
+import { buildErrorMessageRow, buildMessageRow, buildVisitRow } from './common';
 
 export const handleCategory = async (query: string): Promise<ResultMessage> => {
-  const response = await searchCategory(query);
+  let response: CategoryDto[];
+
+  try {
+    response = await searchCategory(query);
+  } catch (e) {
+    return { result: [ buildErrorMessageRow(e) ] }
+  }
 
   const rows: Row[] = response.map(dto => buildVisitRow(
     `${BASE_URL}/category/${dto.categoryType}/${dto.categoryId}/lives`,

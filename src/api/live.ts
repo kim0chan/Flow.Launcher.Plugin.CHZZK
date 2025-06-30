@@ -4,7 +4,7 @@ import { BASE_API_URL } from './constant';
 export const searchLive = async (next?: string): Promise<LiveDto[]> => {
   try {
     const url = new URL(BASE_API_URL + '/lives');
-    if (!!next) url.searchParams.append('next', next);
+    if (next) url.searchParams.append('next', next);
 
     const response = await fetch(url.toString(), {
       method: 'GET',
@@ -15,15 +15,14 @@ export const searchLive = async (next?: string): Promise<LiveDto[]> => {
       }
     });
 
+    // TODO: can we make it better? ('throw' of exception caught locally)
     if (!response.ok) {
-      console.error(`API 요청 실패: ${response.status}`);
-      return [];
+      throw new Error('Failed to fetch live streams.')
     }
 
     const data = await response.json();
     return data?.content?.data ?? [];
   } catch (e) {
-    console.error('searchLive error: ', (e as Error).message);
-    return [];
+    throw e;
   }
 };
