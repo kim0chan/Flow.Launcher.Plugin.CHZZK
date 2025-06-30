@@ -67,13 +67,15 @@ export const buildRow = (
   actionMethod?: string,
   actionParams?: (string | boolean)[],
   actionHideAfterAction?: boolean,
+  score?: number,
 ): Row => {
   const row: Row = {
     Title: title,
     IcoPath: icoPath ?? ICO.APP,
   }
 
-  if (subtitle)     row.Subtitle = subtitle;
+  if (subtitle)   row.Subtitle = subtitle;
+  if (score)      row.score = score;
 
   if (actionMethod) {
     row.JsonRPCAction = {
@@ -91,18 +93,21 @@ export const buildMessageRow = (
   title: string,
   subtitle?: string,
   icoPath?: string,
-): Row => buildRow(title, subtitle, icoPath);
+  score?: number,
+): Row => buildRow(title, subtitle, icoPath, undefined, undefined, undefined, score);
 
 export const buildVisitRow = (
   url: string,
   title: string,
   subtitle?: string,
   icoPath?: string,
-): Row => buildRow(title, subtitle, icoPath, 'visit', [url]);
+  score?: number,
+): Row => buildRow(title, subtitle, icoPath, 'visit', [url], undefined, score);
 
 export const buildChangeQueryRow = (
   query: string,
   title: string,
   subtitle: string,
   icoPath?: string,
-): Row => buildRow(title, subtitle, icoPath, 'Flow.Launcher.ChangeQuery', [query, true], true);
+  score?: number,
+): Row => buildRow(title, subtitle, icoPath, 'Flow.Launcher.ChangeQuery', [query, true], true, score);

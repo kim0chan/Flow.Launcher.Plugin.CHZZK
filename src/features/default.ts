@@ -20,7 +20,8 @@ const buildChannelRows = async (): Promise<Row[]> => {
       `${BASE_URL}/live/${c.channelId}`,
       c.channelName,
       `${c.followerCount} Followers`,
-      c.channelImageUrl
+      c.channelImageUrl,
+      c.followerCount, // TODO: improve query result using meaningful score value
     ))
   ]
 }
@@ -29,8 +30,8 @@ const buildDefaultRows = async (): Promise<Row[]> => (
   [
     ...await buildChannelRows(),
     buildVisitRow(BASE_URL, 'CHZZK', undefined, ICO.APP),
-    buildChangeQueryRow('cz category ', 'Category', undefined, ICO.CATEGORY),
     buildChangeQueryRow('cz live', 'Live', undefined, ICO.LIVE),
+    buildChangeQueryRow('cz category ', 'Category', undefined, ICO.CATEGORY),
     buildChangeQueryRow('cz add ', 'Add Channel', undefined, ICO.ADD),
     buildChangeQueryRow('cz remove ', 'Remove Channel', undefined, ICO.REMOVE),
   ]

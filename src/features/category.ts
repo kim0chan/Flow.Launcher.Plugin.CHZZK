@@ -18,5 +18,5 @@ export const handleCategory = async (query: string): Promise<ResultMessage> => {
 }
 
 export const handleCategoryGuide = (): ResultMessage => ({
-  result: [ buildMessageRow('Enter a category name to explore.', ICO.CATEGORY) ],
+  result: [ buildMessageRow('Enter a category name to explore.', undefined, ICO.CATEGORY) ],
 })

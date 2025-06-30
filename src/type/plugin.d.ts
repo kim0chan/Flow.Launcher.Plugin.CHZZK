@@ -9,6 +9,7 @@ export type Row = {
   Subtitle?: string;
   JsonRPCAction?: RPCAction;
   IcoPath?: string;
+  score?: number;
 }
 
 export type RPCAction = {

@@ -29,7 +29,7 @@ export const handleChannelAddGuide = (): ResultMessage => ({
 });
 
 export const handleChannelRemoveGuide = (): ResultMessage => ({
-  result: [ buildMessageRow('Enter a channel name to remove.', ICO.REMOVE) ],
+  result: [ buildMessageRow('Enter a channel name to remove.', undefined, ICO.REMOVE) ],
 });
 
 export const handleChannelAdd = async (channelId: string): Promise<ResultMessage> => {
@@ -74,6 +74,7 @@ export const handleChannelList = async (channelName?: string): Promise<ResultMes
           c.channelName,
           `${c.followerCount} Followers`,
           c.channelImageUrl || ICO.ADD,
+          c.followerCount,  // TODO: improve query result using meaningful score value.
         )),
         buildSearchRow(channelName),
       ]
