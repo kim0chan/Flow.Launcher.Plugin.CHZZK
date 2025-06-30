@@ -28,11 +28,11 @@ const buildChannelRows = async (): Promise<Row[]> => {
 const buildDefaultRows = async (): Promise<Row[]> => (
   [
     ...await buildChannelRows(),
-    buildVisitRow(BASE_URL, 'CHZZK', undefined, 'images/app.png'),
-    buildChangeQueryRow('cz category ', 'Category', undefined, 'images/category.png'),
-    buildChangeQueryRow('cz live', 'Live', undefined, 'images/live.png'),
-    buildChangeQueryRow('cz add ', 'Add Channel', undefined, 'images/add.png'),
-    buildChangeQueryRow('cz remove ', 'Remove Channel', undefined, 'images/remove.png'),
+    buildVisitRow(BASE_URL, 'CHZZK', undefined, ICO.APP),
+    buildChangeQueryRow('cz category ', 'Category', undefined, ICO.CATEGORY),
+    buildChangeQueryRow('cz live', 'Live', undefined, ICO.LIVE),
+    buildChangeQueryRow('cz add ', 'Add Channel', undefined, ICO.ADD),
+    buildChangeQueryRow('cz remove ', 'Remove Channel', undefined, ICO.REMOVE),
   ]
 );
 
