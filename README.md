@@ -1,6 +1,14 @@
 # Flow.Launcher.Plugin.CHZZK
-CHZZK plugin for [Flow Launcher](https://github.com/Flow-launcher/Flow.Launcher)  
-![GIF](https://github.com/user-attachments/assets/2590727e-66cd-4a33-9c0b-b94f084c2d39)
+CHZZK plugin for [Flow Launcher](https://github.com/Flow-launcher/Flow.Launcher)
+
+![demo](https://github.com/user-attachments/assets/515accae-6b66-4c11-acae-7ef20d9ec6c2)
+
+## Installation
+- Open Flow Launcher
+- Enter the following command:
+```shell
+pm install https://github.com/kim0chan/Flow.Launcher.Plugin.CHZZK/releases/download/v1.0.5/plugin.zip
+```
 
 ## Usage
 Keyword|Description
