@@ -2,8 +2,9 @@ import db from "./data";
 import { BASE_URL } from "../api/constant";
 import { ChannelData, ResultMessage, Row } from '../type/plugin';
 import { buildSearchRow, handleDefault } from './default';
-import { buildMessageRow, buildRow, buildVisitRow } from "./common";
+import { buildErrorMessageRow, buildMessageRow, buildRow, buildVisitRow } from "./common";
 import { searchChannels } from "../api/channel";
+import { ChannelDto } from "../api/model";
 import { ICO } from './constant';
 
 export const addChannel = (channelName: string, channelId: string) => {
@@ -33,7 +34,13 @@ export const handleChannelRemoveGuide = (): ResultMessage => ({
 });
 
 export const handleChannelAdd = async (channelId: string): Promise<ResultMessage> => {
-  const response = await searchChannels(channelId);
+  let response: ChannelDto[];
+
+  try {
+    response = await searchChannels(channelId);
+  } catch (e) {
+    return { result: [ buildErrorMessageRow(e) ] }
+  }
 
   if (response.length === 0) {
     return { result: [ buildMessageRow('Please enter a correct channel ID') ] };
@@ -55,13 +62,19 @@ export const handleChannelAdd = async (channelId: string): Promise<ResultMessage
 
 export const handleChannelList = async (channelName?: string): Promise<ResultMessage> => {
   const addedChannels = db.findByName(channelName || '');
-  const channels = addedChannels.length === 0
-    ? []
-    : await searchChannels(...addedChannels.map(c => c.id));
+  let channels: ChannelDto[];
+
+  try {
+    channels = addedChannels.length === 0
+      ? []
+      : await searchChannels(...addedChannels.map(c => c.id));
+  } catch (e) {
+    return { result: [ buildErrorMessageRow(e) ] };
+  }
 
   if (channels.length === 0) {
     return {
-      result: [buildSearchRow(channelName)],
+      result: [ buildSearchRow(channelName) ],
     };
   }
   if (!channelName || channelName.length === 0) {
@@ -84,9 +97,15 @@ export const handleChannelList = async (channelName?: string): Promise<ResultMes
 
 export const handleChannelRemove = async (channelName: string): Promise<ResultMessage> => {
   const addedChannels = db.findByName(channelName);
-  const channels = addedChannels.length === 0
-    ? []
-    : await searchChannels(...addedChannels.map(c => c.id));
+  let channels: ChannelDto[]
+  ;
+  try {
+    channels = addedChannels.length === 0
+      ? []
+      : await searchChannels(...addedChannels.map(c => c.id));
+  } catch (e) {
+    return { result: [ buildErrorMessageRow(e) ] };
+  }
 
   return {
     result: [

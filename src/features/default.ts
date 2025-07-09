@@ -2,8 +2,9 @@ import db from './data';
 import { BASE_URL } from '../api/constant';
 import { ResultMessage, Row } from '../type/plugin';
 import { searchChannels } from '../api/channel';
-import { buildChangeQueryRow, buildVisitRow } from './common';
+import {buildChangeQueryRow, buildErrorMessageRow, buildVisitRow} from './common';
 import { ICO } from './constant';
+import { ChannelDto } from "../api/model";
 
 export const handleDefault = async (): Promise<ResultMessage> => ({
   result: await buildDefaultRows(),
@@ -11,9 +12,15 @@ export const handleDefault = async (): Promise<ResultMessage> => ({
 
 const buildChannelRows = async (): Promise<Row[]> => {
   const addedChannels = db.findByName('');
-  const channels = addedChannels.length === 0
-    ? []
-    : await searchChannels(...addedChannels.map(c => c.id));
+  let channels: ChannelDto[];
+
+  try {
+    channels = addedChannels.length === 0
+      ? []
+      : await searchChannels(...addedChannels.map(c => c.id));
+  } catch (e) {
+    return [];
+  }
 
   return [
     ...channels.map(c => buildVisitRow(
