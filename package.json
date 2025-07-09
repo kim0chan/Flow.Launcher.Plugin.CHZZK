@@ -1,7 +1,8 @@
 {
   "name": "flow-launcher-chzzk",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "lint": "oxlint"
   },
   "dependencies": {
     "dotenv": "^16.6.0",
@@ -9,6 +10,7 @@
     "typescript": "^5.8.3"
   },
   "devDependencies": {
-    "@types/node": "^24.0.4"
+    "@types/node": "^24.0.4",
+    "oxlint": "^1.6.0"
   }
 }

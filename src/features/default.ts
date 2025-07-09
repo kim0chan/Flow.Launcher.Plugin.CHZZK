@@ -19,18 +19,17 @@ const buildChannelRows = async (): Promise<Row[]> => {
       ? []
       : await searchChannels(...addedChannels.map(c => c.id));
   } catch (e) {
+    console.error("Error fetching channels:", e);
     return [];
   }
 
-  return [
-    ...channels.map(c => buildVisitRow(
-      `${BASE_URL}/live/${c.channelId}`,
-      c.channelName,
-      `${c.followerCount} Followers`,
-      c.channelImageUrl,
-      c.followerCount, // TODO: improve query result using meaningful score value
-    ))
-  ]
+  return channels.map(c => buildVisitRow(
+    `${BASE_URL}/live/${c.channelId}`,
+    c.channelName,
+    `${c.followerCount} Followers`,
+    c.channelImageUrl,
+    c.followerCount, // TODO: improve query result using meaningful score value
+  ))
 }
 
 const buildDefaultRows = async (): Promise<Row[]> => (

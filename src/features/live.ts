@@ -8,7 +8,7 @@ import { buildErrorMessageRow } from './common';
 export const handleLive = async (next?: string): Promise<ResultMessage> => {
   let response: LiveDto[];
   try {
-    response = await searchLive();
+    response = await searchLive(next);
   } catch (e) {
     return { result: [ buildErrorMessageRow(e) ] }
   }
