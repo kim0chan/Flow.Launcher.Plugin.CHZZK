@@ -2,7 +2,7 @@ import db from './data';
 import { BASE_URL } from '../api/constant';
 import { ResultMessage, Row } from '../type/plugin';
 import { searchChannels } from '../api/channel';
-import {buildChangeQueryRow, buildErrorMessageRow, buildVisitRow} from './common';
+import { buildChangeQueryRow, buildVisitRow } from './common';
 import { ICO } from './constant';
 import { ChannelDto } from "../api/model";
 
