@@ -4,7 +4,7 @@ import { ChannelData, ResultMessage, Row } from '../type/plugin';
 import { buildSearchRow, handleDefault } from './default';
 import { buildErrorMessageRow, buildMessageRow, buildRow, buildVisitRow } from "./common";
 import { searchChannels } from "../api/channel";
-import { ChannelDto } from "../api/model";
+import { ChannelDto } from '../api/model';
 import { ICO } from './constant';
 
 export const addChannel = (channelName: string, channelId: string) => {
@@ -108,14 +108,12 @@ export const handleChannelRemove = async (channelName: string): Promise<ResultMe
   }
 
   return {
-    result: [
-      ...channels.map(c => buildRow(
-        c.channelName,
-        `Delete ${c.channelName} (${c.followerCount} Followers)`,
-        c.channelImageUrl || ICO.REMOVE,
-        'remove',
-        [c.channelId],
-      )),
-    ]
+    result: channels.map(c => buildRow(
+      c.channelName,
+      `Delete ${c.channelName} (${c.followerCount} Followers)`,
+      c.channelImageUrl || ICO.REMOVE,
+      'remove',
+      [c.channelId],
+    )),
   };
 }

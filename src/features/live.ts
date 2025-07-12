@@ -1,7 +1,7 @@
 import { ResultMessage, Row } from '../type/plugin';
 import { BASE_URL } from '../api/constant';
 import { searchLive } from '../api/live';
-import { LiveDto } from "../api/model";
+import { LiveDto } from '../api/model';
 import { buildErrorMessageRow } from './common';
 
 // TODO: retrieve next feature

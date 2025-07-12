@@ -1,7 +1,7 @@
 import { ResultMessage, Row } from '../type/plugin';
 import { BASE_URL } from '../api/constant';
 import { ICO } from './constant';
-import { searchCategory } from "../api/category";
+import { searchCategory } from '../api/category';
 import { CategoryDto } from '../api/model';
 import { buildErrorMessageRow, buildMessageRow, buildVisitRow } from './common';
 

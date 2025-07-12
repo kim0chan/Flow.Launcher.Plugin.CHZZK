@@ -3,7 +3,7 @@ require('dotenv').config({ quiet: true });
 const openUrl = require('open');
 import { addChannel, removeChannel } from "./features/channel";
 import { handleDefault } from './features/default';
-import { Command, ResultMessage } from './type/plugin';
+import { Command, ResultMessage } from "./type/plugin";
 import { handleInput } from './features/common';
 
 const { method, parameters } = JSON.parse(process.argv[2]);
