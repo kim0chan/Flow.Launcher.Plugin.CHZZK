@@ -32,6 +32,8 @@ jobs:
 
       - name: Build project
         run: npm run build -w flow-launcher-chzzk
+        env:
+          PROXY_AUTH_KEY: ${{ secrets.PROXY_AUTH_KEY }}
 
       - name: Prepare package directory
         run: |
