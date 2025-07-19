@@ -7,7 +7,7 @@ CHZZK plugin for [Flow Launcher](https://github.com/Flow-launcher/Flow.Launcher)
 - Open Flow Launcher
 - Enter the following command:
 ```shell
-pm install https://github.com/kim0chan/Flow.Launcher.Plugin.CHZZK/releases/download/v1.0.5/plugin.zip
+pm install https://github.com/kim0chan/Flow.Launcher.Plugin.CHZZK/releases/download/v1.1.0/plugin.zip
 ```
 
 ## Usage
