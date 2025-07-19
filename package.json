@@ -1,16 +1,11 @@
 {
-  "name": "flow-launcher-chzzk",
-  "scripts": {
-    "build": "tsc",
-    "lint": "oxlint"
-  },
-  "dependencies": {
-    "dotenv": "^16.6.0",
-    "open": "^8.4.0",
-    "typescript": "^5.8.3"
-  },
+  "name": "flow-launcher-plugin-chzzk-monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "devDependencies": {
-    "@types/node": "^24.0.4",
-    "oxlint": "^1.6.0"
+    "oxlint": "^1.6.0",
+    "typescript": "^5.4.5"
   }
 }

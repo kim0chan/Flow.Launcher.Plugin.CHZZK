@@ -24,8 +24,7 @@ export const chzzkApi = {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Client-Id': process.env.CLIENT_ID,
-        'Client-Secret': process.env.CLIENT_SECRET,
+        'X-Proxy-Auth-Key': process.env.PROXY_AUTH_KEY,
       },
     });
 
