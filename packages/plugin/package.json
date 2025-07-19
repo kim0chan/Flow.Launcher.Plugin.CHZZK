@@ -1,9 +1,9 @@
 {
   "name": "flow-launcher-chzzk",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "CHZZK plugin for Flow Launcher",
   "scripts": {
-    "build": "tsc",
+    "build": "esbuild src/main.ts --bundle --platform=node --outfile=dist/main.js --define:process.env.PROXY_AUTH_KEY='\"$PROXY_AUTH_KEY\"'",
     "lint": "oxlint"
   },
   "dependencies": {
@@ -11,6 +11,7 @@
     "open": "^8.4.0"
   },
   "devDependencies": {
-    "@types/node": "^24.0.4"
+    "@types/node": "^24.0.4",
+    "esbuild": "^0.25.7"
   }
 }
