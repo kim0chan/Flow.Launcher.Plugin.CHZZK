@@ -1,6 +1,6 @@
 {
   "name": "flow-launcher-chzzk",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "CHZZK plugin for Flow Launcher",
   "scripts": {
     "build": "tsc",
