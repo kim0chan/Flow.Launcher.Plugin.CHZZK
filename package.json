@@ -5,7 +5,7 @@
     "packages/*"
   ],
   "devDependencies": {
-    "oxlint": "^0.6.0",
+    "oxlint": "^1.6.0",
     "typescript": "^5.4.5"
   }
 }

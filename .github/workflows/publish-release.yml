@@ -35,10 +35,16 @@ jobs:
 
       - name: Prepare package directory
         run: |
-          mkdir plugin
-          npm pack --workspace flow-launcher-chzzk
-          tar -xzf flow-launcher-chzzk-*.tgz -C plugin --strip-components=1
+          mkdir plugin 
+          cp -r packages/plugin/images plugin/
+           
           cp README.md plugin/ || true
+          cp packages/plugin/plugin.json plugin/
+          cp packages/plugin/package.json plugin/
+          cd plugin
+          npm install --omit=dev
+          rm package.json package-lock.json
+          cd ..
 
       - name: Zip plugin
         run: |
