@@ -37,7 +37,7 @@ jobs:
         run: |
           mkdir plugin 
           cp -r packages/plugin/images plugin/
-           
+          cp -r packages/plugin/dist plugin/
           cp README.md plugin/ || true
           cp packages/plugin/plugin.json plugin/
           cp packages/plugin/package.json plugin/
