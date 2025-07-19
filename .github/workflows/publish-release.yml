@@ -23,7 +23,7 @@ jobs:
         id: version
         uses: notiz-dev/github-action-json-property@release
         with:
-          path: 'plugin.json'
+          path: 'packages/plugin/plugin.json'
           prop_path: 'Version'
       - run: echo 'VERSION=${{ steps.version.outputs.prop }}'
 
@@ -31,15 +31,13 @@ jobs:
         run: npm ci
 
       - name: Build project
-        run: npm run build
+        run: npm run build -w flow-launcher-chzzk
 
       - name: Prepare package directory
         run: |
           mkdir plugin
-          cp -r dist plugin/
-          cp -r node_modules plugin/
-          cp plugin.json plugin/
-          cp -r images plugin/
+          npm pack --workspace flow-launcher-chzzk
+          tar -xzf flow-launcher-chzzk-*.tgz -C plugin --strip-components=1
           cp README.md plugin/ || true
 
       - name: Zip plugin

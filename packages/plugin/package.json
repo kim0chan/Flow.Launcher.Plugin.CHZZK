@@ -1,0 +1,16 @@
+{
+  "name": "flow-launcher-chzzk",
+  "version": "1.0.0",
+  "description": "CHZZK plugin for Flow Launcher",
+  "scripts": {
+    "build": "tsc",
+    "lint": "oxlint"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.0",
+    "open": "^8.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.4"
+  }
+}

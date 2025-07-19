@@ -25,7 +25,7 @@ const buildChannelRows = async (): Promise<Row[]> => {
 
   return channels.map(c => buildVisitRow(
     `${BASE_URL}/live/${c.channelId}`,
-    c.channelName,okay,
+    c.channelName,
     `${c.followerCount} Followers`,
     c.channelImageUrl,
     c.followerCount, // TODO: improve query result using meaningful score value
