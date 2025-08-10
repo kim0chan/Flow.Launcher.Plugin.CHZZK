@@ -51,13 +51,13 @@ jobs:
       - name: Zip plugin
         run: |
           cd plugin
-          zip -r ../plugin.zip .
+          zip -r ../Flow.Launcher.Plugin.CHZZK.zip .
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           name: Release v${{ steps.version.outputs.prop }}
           tag_name: v${{ steps.version.outputs.prop }}
-          files: plugin.zip
+          files: Flow.Launcher.Plugin.CHZZK.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
